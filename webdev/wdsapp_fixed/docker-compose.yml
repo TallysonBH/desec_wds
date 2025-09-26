@@ -7,7 +7,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - /home/dev/aula/webdev/wdsapp_fixed:/var/www/html/aula/webdev/wdsapp_fixed
+      - ~/aula/desec_wds/webdev/wdsapp_fixed:/var/www/html/aula/webdev/wdsapp_fixed
       - ./apache-conf:/etc/apache2/conf-available
     restart: always
     depends_on:

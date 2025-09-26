@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y libzip-dev unzip \
     && docker-php-ext-install mysqli pdo pdo_mysql
 
 # Habilita o handler de PHP para qualquer arquivo .php no DocumentRoot
-RUN echo 'Alias /aula/webdev/wdsapp /var/www/html\n\
+RUN echo 'Alias /aula/webdev/desec_wds/wdsapp /var/www/html\n\
 <Directory "/var/www/html">\n\
     Options Indexes FollowSymLinks\n\
     AllowOverride All\n\
