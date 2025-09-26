@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: webdevsec_web
+    ports:
+      - "80:80"
+    volumes:
+      - /home/dev/aula/webdev/wdsapp:/var/www/html/aula/webdev/wdsapp
+      - ./apache-conf:/etc/apache2/conf-available
+    restart: always
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8
+    container_name: devsec_wdsapp_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: devsec_wdsapp_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./sql/wdsapp.sql:/docker-entrypoint-initdb.d/wdsapp.sql
+    restart: always
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: webdevsec_phpmyadmin
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+    restart: always
+
+volumes:
+  db_data:
